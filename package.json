@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.10.5",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
     "axios": "^0.19.2",
     "gray-matter": "^4.0.2",
     "marked": "^1.1.0",

@@ -4,9 +4,11 @@ import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 export class Post {
   @PrimaryGeneratedColumn('increment')
   id: number;
-
-  constructor(
-    @Column('varchar') public title:string,
-    @Column('text') public content: string
-  ){}
+  @Column('varchar')
+  title: string;
+  @Column('text')
+  content: string;
+  constructor(attributes: Partial<Post>){
+    Object.assign(this, attributes)
+  }
 }

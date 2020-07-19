@@ -31,7 +31,12 @@ var _Post = require("./entity/Post");
             }
 
             _context.next = 6;
-            return connection.manager.save([new _Post.Post('Post 1', '我的第1篇文章'), new _Post.Post('Post 2', '我的第2篇文章'), new _Post.Post('Post 3', '我的第3篇文章'), new _Post.Post('Post 4', '我的第4篇文章'), new _Post.Post('Post 5', '我的第5篇文章'), new _Post.Post('Post 6', '我的第6篇文章'), new _Post.Post('Post 7', '我的第7篇文章'), new _Post.Post('Post 8', '我的第8篇文章'), new _Post.Post('Post 9', '我的第9篇文章'), new _Post.Post('Post 10', '我的第10篇文章'), new _Post.Post('Post 11', '我的第11篇文章')]);
+            return connection.manager.save([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (n) {
+              return new _Post.Post({
+                title: "Post ".concat(n),
+                content: "\u8FD9\u662F\u6211\u7684\u7B2C".concat(n, "\u7BC7\u6587\u7AE0")
+              });
+            }));
 
           case 6:
             console.log('posts 数据填充了');

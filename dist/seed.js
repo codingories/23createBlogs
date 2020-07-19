@@ -14,7 +14,7 @@ var _Post = require("./entity/Post");
 
 (0, _typeorm.createConnection)().then( /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(connection) {
-    var posts, p, posts2;
+    var posts;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -24,24 +24,23 @@ var _Post = require("./entity/Post");
 
           case 2:
             posts = _context.sent;
-            console.log('posts1', posts);
-            p = new _Post.Post();
-            p.title = 'Post 1';
-            p.content = '我de第一篇文章 ';
+
+            if (!(posts.length === 0)) {
+              _context.next = 7;
+              break;
+            }
+
+            _context.next = 6;
+            return connection.manager.save([new _Post.Post('Post 1', '我的第1篇文章'), new _Post.Post('Post 2', '我的第2篇文章'), new _Post.Post('Post 3', '我的第3篇文章'), new _Post.Post('Post 4', '我的第4篇文章'), new _Post.Post('Post 5', '我的第5篇文章'), new _Post.Post('Post 6', '我的第6篇文章'), new _Post.Post('Post 7', '我的第7篇文章'), new _Post.Post('Post 8', '我的第8篇文章'), new _Post.Post('Post 9', '我的第9篇文章'), new _Post.Post('Post 10', '我的第10篇文章'), new _Post.Post('Post 11', '我的第11篇文章')]);
+
+          case 6:
+            console.log('posts 数据填充了');
+
+          case 7:
             _context.next = 9;
-            return connection.manager.save(p);
-
-          case 9:
-            _context.next = 11;
-            return connection.manager.find(_Post.Post);
-
-          case 11:
-            posts2 = _context.sent;
-            console.log('posts2', posts2);
-            _context.next = 15;
             return connection.close();
 
-          case 15:
+          case 9:
           case "end":
             return _context.stop();
         }

@@ -13,6 +13,8 @@ export class RenameColumns1595509398289 implements MigrationInterface {
         await queryRunner.renameColumn('posts','authorId','author_id')
         await queryRunner.renameColumn('comments','userId','user_id')
         await queryRunner.renameColumn('comments','userId','post_id')
+
+
     }
 
 }

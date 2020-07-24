@@ -41,17 +41,19 @@ var _Comment = require("./entity/Comment");
             return manager.save(p1);
 
           case 12:
-            console.log(p1.id);
             c1 = new _Comment.Comment();
             c1.user = u1;
             c1.post = p1;
             c1.content = 'Awesome';
-            _context.next = 19;
+            _context.next = 18;
             return manager.save(c1);
 
-          case 19:
-            _context.next = 21;
+          case 18:
+            _context.next = 20;
             return connection.close();
+
+          case 20:
+            console.log('ok!');
 
           case 21:
           case "end":

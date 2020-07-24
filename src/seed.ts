@@ -18,7 +18,6 @@ createConnection().then(async connection => {
     p1.content = 'My First Post';
     p1.author = u1;
     await manager.save(p1);
-    console.log(p1.id)
 
     const c1 = new Comment()
     c1.user = u1
@@ -27,4 +26,5 @@ createConnection().then(async connection => {
     await manager.save(c1);
 
     await connection.close();
+    console.log('ok!')
 }).catch(error => console.log(error));

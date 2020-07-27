@@ -3,9 +3,6 @@ import { useState, useCallback } from 'react';
 import axios from 'axios'
 
 const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
-
-  const {username, passowd, passwordConfirmation} = req.body
-
   const [formData, setFormData] = useState({
     username: '',
     password: '',

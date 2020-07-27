@@ -9,7 +9,9 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
     passwordConfirmation: ''
   })
 
-
+  const [errors, setErrors] = useState({
+    username:[], password:[], passwordConfirmation:[]
+  })
 
   const onSubmit = useCallback((e)=>{
     e.preventDefault()
@@ -19,7 +21,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
           const response: AxiosResponse = error.response;
           // if(response)
           if(response.status === 422){
-            alert(JSON.stringify(response.data));
+            setErrors({...errors, ...response.data});
           }
         }
       })
@@ -28,7 +30,6 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
   return (
     <>
       <h1>注册</h1>
-      {JSON.stringify(formData)}
       <form onSubmit={onSubmit}>
         <div>
           <label>
@@ -39,6 +40,9 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
                      username: e.target.value
                    })}
             />
+            {errors.username?.length > 0 && <div>
+              {errors.username.join(',')}
+            </div>}
           </label>
         </div>
         <div>
@@ -51,6 +55,9 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
                    })}
             />
           </label>
+          {errors.password?.length > 0 && <div>
+              {errors.password.join(',')}
+            </div>}
         </div>
         <div>
           <label>
@@ -62,6 +69,9 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
                    })}
             />
           </label>
+          {errors.passwordConfirmation?.length > 0 && <div>
+            {errors.passwordConfirmation.join(',')}
+          </div>}
         </div>
         <div>
           <button type="submit">注册</button>

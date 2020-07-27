@@ -1,6 +1,6 @@
 import {NextPage} from 'next'
 import { useState, useCallback } from 'react';
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
   const [formData, setFormData] = useState({
@@ -8,9 +8,21 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
     password: '',
     passwordConfirmation: ''
   })
+
+
+
   const onSubmit = useCallback((e)=>{
     e.preventDefault()
     axios.post(`/api/v1/users`, formData)
+      .then(()=>{},(error)=>{
+        if(error.response){
+          const response: AxiosResponse = error.response;
+          // if(response)
+          if(response.status === 422){
+            alert(JSON.stringify(response.data));
+          }
+        }
+      })
   },[formData]) // []不加参数参数，表示只在页面第一次创建渲染创建onSubmit函数,其它时候ui怎么变,onSubmit不变
   // [formData] 表示formData变onSubmit也变,不加打印出来就是空，加了才有值
   return (

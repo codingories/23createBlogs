@@ -3,6 +3,9 @@ import { useState, useCallback } from 'react';
 import axios from 'axios'
 
 const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
+
+  const {username, passowd, passwordConfirmation} = req.body
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -10,7 +13,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
   })
   const onSubmit = useCallback((e)=>{
     e.preventDefault()
-    axios.post(`/ap1/v1/users`, formData)
+    axios.post(`/api/v1/users`, formData)
   },[formData]) // []不加参数参数，表示只在页面第一次创建渲染创建onSubmit函数,其它时候ui怎么变,onSubmit不变
   // [formData] 表示formData变onSubmit也变,不加打印出来就是空，加了才有值
   return (

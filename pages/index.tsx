@@ -19,7 +19,6 @@ const index: NextPage<Props> = (props) => {
             {post.title}
           </a>
         </Link>
-        // <div key={post.id}>{post.title}</div>
       )}
     </div>
   );

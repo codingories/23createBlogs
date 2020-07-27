@@ -16,7 +16,9 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
   const onSubmit = useCallback((e)=>{
     e.preventDefault()
     axios.post(`/api/v1/users`, formData)
-      .then(()=>{},(error)=>{
+      .then(()=>{
+        alert('注册成功!')
+      },(error)=>{
         if(error.response){
           const response: AxiosResponse = error.response;
           // if(response)

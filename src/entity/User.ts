@@ -1,8 +1,9 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn} from 'typeorm'
 import {Post} from './Post'
 import {Comment} from './Comment'
 
 @Entity('users')
+@Unique(['username'])
 export class User {
   @PrimaryGeneratedColumn('increment')
   id: number;

@@ -28,6 +28,9 @@ export class User {
   passwordConfirmation: string; // 这两个字段不是数据库，但是是这个类上
 
   async validate(){
+    console.log('start validate')
+    console.log('this.password',this.password)
+    console.log(this.password ==='')
     if(this.username.trim()===''){
       this.errors.username.push('不能为空')
     }
@@ -40,10 +43,12 @@ export class User {
     if(this.username.trim().length<=3){
       this.errors.username.push('太短')
     }
-    const found = (await getDatabaseConnection()).manager
+    const found = await (await getDatabaseConnection()).manager
       .find(User, {username:this.username})
 
-    if(found){
+    console.log('-----aaa',found)
+
+    if(found.length>0 ){
       this.errors.username.push('已经存在,不能重复注册')
     }
     if(this.password ===''){
@@ -55,6 +60,8 @@ export class User {
   }
 
   hasErrors(){
+    console.log('hasErrors')
+    console.log(this.errors)
     return !!Object.values(this.errors).find(v => v.length > 0)
   }
 

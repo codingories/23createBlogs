@@ -70,6 +70,10 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                console.log('start validate');
+                console.log('this.password', this.password);
+                console.log(this.password === '');
+
                 if (this.username.trim() === '') {
                   this.errors.username.push('不能为空');
                 }
@@ -86,15 +90,20 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
                   this.errors.username.push('太短');
                 }
 
-                _context.next = 6;
+                _context.next = 9;
                 return (0, _getDatabaseConnection.getDatabaseConnection)();
 
-              case 6:
-                found = _context.sent.manager.find(User, {
+              case 9:
+                _context.next = 11;
+                return _context.sent.manager.find(User, {
                   username: this.username
                 });
 
-                if (found) {
+              case 11:
+                found = _context.sent;
+                console.log('-----aaa', found);
+
+                if (found.length > 0) {
                   this.errors.username.push('已经存在,不能重复注册');
                 }
 
@@ -106,7 +115,7 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
                   this.errors.passwordConfirmation.push('两次密码不一致');
                 }
 
-              case 10:
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -123,6 +132,8 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
   }, {
     key: "hasErrors",
     value: function hasErrors() {
+      console.log('hasErrors');
+      console.log(this.errors);
       return !!Object.values(this.errors).find(function (v) {
         return v.length > 0;
       });

@@ -14,11 +14,10 @@ const Posts: NextApiHandler = async (req, res) => {
   user.passwordConfirmation = passwordConfirmation // 和明文存差不多,碰撞，彩虹表，真正做产品不能md5
   await user.validate()
   if(await user.hasErrors()){
-    console.log('shit')
     res.statusCode = 422
     res.write(JSON.stringify(user.errors))
   }else{
-    console.log('fuck')
+    // user.passwordDigest = md5(password) // 和明文存差不多,碰撞，彩虹表，真正做产品不能md5
     await connection.manager.save(user) // 保存用户
     res.statusCode = 200
     res.write(JSON.stringify(user))

@@ -31,7 +31,11 @@ var _Comment = require("./Comment");
 
 var _getDatabaseConnection = require("../../lib/getDatabaseConnection");
 
-var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _temp;
+var _md = _interopRequireDefault(require("md5"));
+
+var _lodash = _interopRequireDefault(require("lodash"));
+
+var _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _temp;
 
 var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)(['username']), _dec3 = (0, _typeorm.PrimaryGeneratedColumn)('increment'), _dec4 = (0, _typeorm.Column)('varchar'), _dec5 = (0, _typeorm.Column)('varchar'), _dec6 = (0, _typeorm.CreateDateColumn)(), _dec7 = (0, _typeorm.UpdateDateColumn)(), _dec8 = (0, _typeorm.OneToMany)(function (type) {
   return _Post.Post;
@@ -41,7 +45,7 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
   return _Comment.Comment;
 }, function (comment) {
   return comment.user;
-}), _dec(_class = _dec2(_class = (_class2 = (_temp = /*#__PURE__*/function () {
+}), _dec10 = (0, _typeorm.BeforeInsert)(), _dec(_class = _dec2(_class = (_class2 = (_temp = /*#__PURE__*/function () {
   function User() {
     (0, _classCallCheck2["default"])(this, User);
     (0, _initializerDefineProperty2["default"])(this, "id", _descriptor, this);
@@ -70,10 +74,6 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('start validate');
-                console.log('this.password', this.password);
-                console.log(this.password === '');
-
                 if (this.username.trim() === '') {
                   this.errors.username.push('不能为空');
                 }
@@ -90,18 +90,17 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
                   this.errors.username.push('太短');
                 }
 
-                _context.next = 9;
+                _context.next = 6;
                 return (0, _getDatabaseConnection.getDatabaseConnection)();
 
-              case 9:
-                _context.next = 11;
+              case 6:
+                _context.next = 8;
                 return _context.sent.manager.find(User, {
                   username: this.username
                 });
 
-              case 11:
+              case 8:
                 found = _context.sent;
-                console.log('-----aaa', found);
 
                 if (found.length > 0) {
                   this.errors.username.push('已经存在,不能重复注册');
@@ -115,7 +114,7 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
                   this.errors.passwordConfirmation.push('两次密码不一致');
                 }
 
-              case 16:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -132,11 +131,19 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
   }, {
     key: "hasErrors",
     value: function hasErrors() {
-      console.log('hasErrors');
-      console.log(this.errors);
       return !!Object.values(this.errors).find(function (v) {
         return v.length > 0;
       });
+    }
+  }, {
+    key: "generatePasswordDigest",
+    value: function generatePasswordDigest() {
+      this.passwordDigest = (0, _md["default"])(this.password);
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      return _lodash["default"].omit(this, ['errors', 'password', 'passwordConfirmation', 'passwordDigest']);
     }
   }]);
   return User;
@@ -175,5 +182,5 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
   enumerable: true,
   writable: true,
   initializer: null
-})), _class2)) || _class) || _class);
+}), (0, _applyDecoratedDescriptor2["default"])(_class2.prototype, "generatePasswordDigest", [_dec10], Object.getOwnPropertyDescriptor(_class2.prototype, "generatePasswordDigest"), _class2.prototype)), _class2)) || _class) || _class);
 exports.User = User;

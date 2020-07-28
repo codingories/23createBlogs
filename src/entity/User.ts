@@ -1,7 +1,9 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn} from 'typeorm'
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn, BeforeInsert} from 'typeorm'
 import {Post} from './Post'
 import {Comment} from './Comment'
 import {getDatabaseConnection} from '../../lib/getDatabaseConnection'
+import md5 from 'md5';
+import _ from 'lodash'
 
 @Entity('users')
 @Unique(['username'])
@@ -28,9 +30,6 @@ export class User {
   passwordConfirmation: string; // 这两个字段不是数据库，但是是这个类上
 
   async validate(){
-    console.log('start validate')
-    console.log('this.password',this.password)
-    console.log(this.password ==='')
     if(this.username.trim()===''){
       this.errors.username.push('不能为空')
     }
@@ -45,9 +44,6 @@ export class User {
     }
     const found = await (await getDatabaseConnection()).manager
       .find(User, {username:this.username})
-
-    console.log('-----aaa',found)
-
     if(found.length>0 ){
       this.errors.username.push('已经存在,不能重复注册')
     }
@@ -60,9 +56,16 @@ export class User {
   }
 
   hasErrors(){
-    console.log('hasErrors')
-    console.log(this.errors)
     return !!Object.values(this.errors).find(v => v.length > 0)
+  }
+
+  @BeforeInsert()
+  generatePasswordDigest(){
+    this.passwordDigest = md5(this.password)
+  }
+
+  toJSON(){
+    return _.omit(this, ['errors', 'password', 'passwordConfirmation', 'passwordDigest'])
   }
 
 }

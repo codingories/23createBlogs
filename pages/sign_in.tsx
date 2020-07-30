@@ -18,7 +18,6 @@ const SignUp: NextPage = () => { // 利用NextPage初始化登录页面
     axios.post(`/api/v1/sessions`, formData)
       .then(()=>{
         alert('登录成功!')
-        window.location.href = '/sign_in'
       },(error)=>{
         if(error.response){
           const response: AxiosResponse = error.response;

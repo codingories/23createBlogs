@@ -26,7 +26,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化登录页面
           if(response.status === 422){
             console.log('response.data')
             console.log(response.data)
-            setErrors({...errors, ...response.data});
+            setErrors(response.data);
           }
         }
       })

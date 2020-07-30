@@ -15,7 +15,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化登录页面
 
   const onSubmit = useCallback((e)=>{
     e.preventDefault()
-    axios.post(`/api/v1/users`, formData)
+    axios.post(`/api/v1/sessions`, formData)
       .then(()=>{
         alert('登录成功!')
         window.location.href = '/sign_in'

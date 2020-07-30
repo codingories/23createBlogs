@@ -2,7 +2,7 @@ import {NextPage} from 'next'
 import { useState, useCallback } from 'react';
 import axios, { AxiosResponse } from 'axios'
 
-const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
+const SignUp: NextPage = () => { // 利用NextPage初始化登录页面
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -17,7 +17,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
     e.preventDefault()
     axios.post(`/api/v1/users`, formData)
       .then(()=>{
-        alert('注册成功!')
+        alert('登录成功!')
         window.location.href = '/sign_in'
       },(error)=>{
         if(error.response){
@@ -34,7 +34,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
   // [formData] 表示formData变onSubmit也变,不加打印出来就是空，加了才有值
   return (
     <>
-      <h1>注册</h1>
+      <h1>登录</h1>
       <form onSubmit={onSubmit}>
         <div>
           <label>
@@ -65,21 +65,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
             </div>}
         </div>
         <div>
-          <label>
-            确认密码
-            <input type="password" value={formData.passwordConfirmation}
-                   onChange={e=> setFormData({
-                     ...formData,
-                     passwordConfirmation: e.target.value
-                   })}
-            />
-          </label>
-          {errors.passwordConfirmation?.length > 0 && <div>
-            {errors.passwordConfirmation.join(',')}
-          </div>}
-        </div>
-        <div>
-          <button type="submit">注册</button>
+          <button type="submit">登录</button>
         </div>
       </form>
     </>

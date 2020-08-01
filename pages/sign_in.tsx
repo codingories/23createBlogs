@@ -41,7 +41,8 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
         </div>
       }
       <h1>登录</h1>
-      <Form fields={[{label:'用户名'},{label:'密码'}]}></Form>
+      <Form fields={[{label:'用户名',type:'text'},
+         {label:'密码',type:'password'}]}></Form>
       <form onSubmit={onSubmit}>
         <div>
           <label>

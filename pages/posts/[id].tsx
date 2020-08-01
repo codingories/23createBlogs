@@ -20,11 +20,8 @@ const postsShow: NextPage<Props> = (props) => {
 export default postsShow;
 
 export const getServerSideProps: GetServerSideProps<any, {id:string}>  = async (context) => {
-  console.log('bitch')
   const connection = await getDatabaseConnection()
   const post = await connection.manager.findOne(Post, context.params.id)
-  // console.log('connect1')
-  console.log('postfuck',post)
   return {
     props: {
       post : JSON.parse(JSON.stringify(post))

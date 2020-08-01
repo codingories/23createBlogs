@@ -1,10 +1,12 @@
 import { withIronSession } from 'next-iron-session'
 import {NextApiHandler} from 'next'
 
+console.log('process.env.SECRET',process.env.SECRET)
+
 export function withSession(handler:NextApiHandler) {
   return withIronSession(handler, {
     // password: process.env.SECRET_COOKIE_PASSWORD,
-    password: '8963956d-3de2-45e8-a608-ff08313827a3',
+    password: process.env.SECRET,
     cookieName: 'blog',
     cookieOptions: {secure: false}
   })

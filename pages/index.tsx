@@ -3,7 +3,6 @@ import {getDatabaseConnection} from '../lib/getDatabaseConnection'
 import {Post} from '../src/entity/Post'
 import Link from 'next/link'
 
-console.log('执行了 index.tsx')
 
 type Props = {
   posts: Post[],

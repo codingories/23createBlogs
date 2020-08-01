@@ -1,15 +1,13 @@
-import {GetStaticProps, NextPage} from 'next';
-import {usePosts} from '../../hooks/usePosts';
-import {useCallback} from 'react';
+import {NextPage} from 'next';
 import {getPosts} from '../../lib/posts';
 import Link from 'next/link';
+import {Post} from '../../src/entity/Post'
 
 type Props = {
   posts: Post[];
 }
 const PostsIndex: NextPage<Props> = (props) => {
   const {posts} = props;
-  console.log(posts);
   return (
     <div>
       <h1>文章列表</h1>

@@ -5,7 +5,6 @@ import {withSession} from '../lib/withSession'
 import {User} from '../src/entity/User'
 
 const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化登录页面
-  console.log(props.user)
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -26,8 +25,6 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
           const response: AxiosResponse = error.response;
           // if(response)
           if(response.status === 422){
-            console.log('response.data')
-            console.log(response.data)
             setErrors(response.data);
           }
         }
@@ -87,8 +84,6 @@ export const getServerSideProps: GetServerSideProps =
   withSession( async (context) => {
     // @ts-ignore
     const user = context.req.session.get('currentUser')
-    // console.log('user')
-    // console.log(user)
     return {
       props: {
         user: JSON.parse(JSON.stringify(user))

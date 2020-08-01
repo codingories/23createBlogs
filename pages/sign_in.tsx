@@ -31,6 +31,14 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
       })
   },[formData]) // []不加参数参数，表示只在页面第一次创建渲染创建onSubmit函数,其它时候ui怎么变,onSubmit不变
   // [formData] 表示formData变onSubmit也变,不加打印出来就是空，加了才有值
+
+  const onChange = useCallback((key, value)=>{
+    setFormData({
+      ...formData,
+      [key]: value // [key]如果不加[]，就是"key"
+    })
+  },[formData])
+
   return (
     <>
       {
@@ -42,15 +50,11 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
       <h1>登录</h1>
       <Form fields={[
          {label:'用户名',type:'text', value: formData.username,
-           onChange: e=> setFormData({
-             ...formData,
-             username: e.target.value
-           }), errors: errors.username },
+           onChange: e=>onChange('username', e.target.value)
+           , errors: errors.username },
          { label:'密码',type:'password', value: formData.password,
-           onChange:e=> setFormData({
-            ...formData,
-            password: e.target.value
-         }), errors: errors.password}]
+          onChange: e=>onChange('password', e.target.password)
+         , errors: errors.password}]
         } onSubmit={onSubmit} buttons={<>
           <button type="submit">登录</button>
       </>} />

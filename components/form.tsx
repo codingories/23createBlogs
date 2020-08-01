@@ -1,5 +1,9 @@
 type Props = {
-  fields: { label: string, type: 'text'|'password' }[]
+  fields: {
+    label: string,
+    type: 'text'|'password',
+    value: string | number
+  }[]
 }
 
 export const Form: React.FC<Props> = (props) =>{
@@ -9,7 +13,7 @@ export const Form: React.FC<Props> = (props) =>{
         <div>
           <label>
             {field.label}
-            <input type={field.type}/>
+            <input type={field.type} value={field.value}/>
           </label>
         </div>)}
     </form>

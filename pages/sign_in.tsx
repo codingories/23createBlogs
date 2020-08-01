@@ -2,8 +2,10 @@ import {GetServerSideProps, NextPage} from 'next'
 import { useState, useCallback } from 'react';
 import axios, { AxiosResponse } from 'axios'
 import {withSession} from '../lib/withSession'
+import {User} from '../src/entity/User'
 
-const SignUp: NextPage = () => { // 利用NextPage初始化登录页面
+const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化登录页面
+  console.log(props.user)
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -34,6 +36,12 @@ const SignUp: NextPage = () => { // 利用NextPage初始化登录页面
   // [formData] 表示formData变onSubmit也变,不加打印出来就是空，加了才有值
   return (
     <>
+      {
+        props.user &&
+        <div>
+          当前登录用户为 {props.user.username}
+        </div>
+      }
       <h1>登录</h1>
       <form onSubmit={onSubmit}>
         <div>
@@ -79,8 +87,8 @@ export const getServerSideProps: GetServerSideProps =
   withSession( async (context) => {
     // @ts-ignore
     const user = context.req.session.get('currentUser')
-    console.log('user')
-    console.log(user)
+    // console.log('user')
+    // console.log(user)
     return {
       props: {
         user: JSON.parse(JSON.stringify(user))

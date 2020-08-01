@@ -9,11 +9,10 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    passwordConfirmation: ''
   })
 
   const [errors, setErrors] = useState({
-    username:[], password:[], passwordConfirmation:[]
+    username:[], password:[]
   })
 
   const onSubmit = useCallback((e)=>{
@@ -55,39 +54,6 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
         } onSubmit={onSubmit} buttons={<>
           <button type="submit">登录</button>
       </>} />
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>
-            用户名
-            <input type="text" value={formData.username}
-                   onChange={e=> setFormData({
-                     ...formData,
-                     username: e.target.value
-                   })}
-            />
-            {errors.username?.length > 0 && <div>
-              {errors.username.join(',')}
-            </div>}
-          </label>
-        </div>
-        <div>
-          <label>
-            密码
-            <input type="password" value={formData.password}
-                   onChange={e=> setFormData({
-                     ...formData,
-                     password: e.target.value
-                   })}
-            />
-          </label>
-          {errors.password?.length > 0 && <div>
-            {errors.password.join(',')}
-          </div>}
-        </div>
-        <div>
-          <button type="submit">登录</button>
-        </div>
-      </form>
     </>
   );
 }

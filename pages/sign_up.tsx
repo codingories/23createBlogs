@@ -22,10 +22,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
       },(error)=>{
         if(error.response){
           const response: AxiosResponse = error.response;
-          // if(response)
           if(response.status === 422){
-            console.log('response.data')
-            console.log(response.data)
             setErrors( response.data);
           }
         }

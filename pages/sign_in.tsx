@@ -3,6 +3,7 @@ import { useState, useCallback } from 'react';
 import axios, { AxiosResponse } from 'axios'
 import {withSession} from '../lib/withSession'
 import {User} from '../src/entity/User'
+import {Form} from '../components/form'
 
 const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化登录页面
   const [formData, setFormData] = useState({
@@ -40,6 +41,7 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
         </div>
       }
       <h1>登录</h1>
+      <Form fields={[{label:'用户名'},{label:'密码'}]}></Form>
       <form onSubmit={onSubmit}>
         <div>
           <label>

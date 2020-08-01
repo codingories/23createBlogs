@@ -6,5 +6,6 @@ export function withSession(handler:NextApiHandler) {
     // password: process.env.SECRET_COOKIE_PASSWORD,
     password: '8963956d-3de2-45e8-a608-ff08313827a3',
     cookieName: 'blog',
+    cookieOptions: {secure: false}
   })
 }

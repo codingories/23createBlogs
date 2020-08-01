@@ -25,9 +25,7 @@ export class SignIn {
     } else {
       this.errors.username.push('用户名不存在')
     }
-
   }
-
   hasErrors(){
     return !!Object.values(this.errors).find(v => v.length > 0)
   }

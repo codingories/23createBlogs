@@ -6,7 +6,15 @@ type Field<T> = {
   key: keyof T,
 }
 
-export function useForm<T>(initFormData: T, fields: Field<T>[],  buttons: ReactChild, onSubmit: (fd: T) => void) { // 通过参数反推T,useForm里面有个T,T的类型就是initFormData的类型
+type useFormOptions<T> = {
+  initFormData: T;
+  fields: Field<T>[];
+  buttons: ReactChild;
+  onSubmit: (fd: T) => void
+}
+
+export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,useForm里面有个T,T的类型就是initFormData的类型
+  const {initFormData,fields,buttons,onSubmit} = options
   // 非受控
   const [formData, setFormData] = useState(initFormData)
   const [errors, setErrors] = useState(() => {

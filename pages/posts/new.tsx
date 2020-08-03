@@ -22,13 +22,15 @@ const PostsNew: NextPage = () => {
   const initFormData =  {title: '', content: ''}
 
   const {form, setErrors} = useForm(
-    initFormData,
-    [
-          {label:'标题',type:'text', key: 'title'},
-          {label:'内容',type:'textarea', key:'content'},
-        ],
-        <button type="submit">提交</button>,
-    onSubmit
+    {
+      initFormData,
+      fields: [
+        {label:'标题',type:'text', key: 'title'},
+        {label:'内容',type:'textarea', key:'content'},
+      ],
+      buttons: <button type="submit">提交</button>,
+      onSubmit
+    }
   );
 
   return(

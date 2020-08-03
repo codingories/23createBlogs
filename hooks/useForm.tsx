@@ -54,7 +54,7 @@ export function useForm<T>(initFormData: T, fields: Field<T>[],  buttons: ReactC
     </form>
   )
   return {
-    form: form
+    form: form, setErrors: setErrors
   }
 }
 

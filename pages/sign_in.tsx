@@ -1,22 +1,16 @@
 import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next'
-import { useState, useCallback } from 'react';
 import axios, { AxiosResponse } from 'axios'
 import {withSession} from '../lib/withSession'
 import {User} from '../src/entity/User'
-import {Form} from '../components/form'
+import {useForm} from '../hooks/useForm'
 
 const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化登录页面
-  const [formData, setFormData] = useState({
+  const initFormData = {
     username: '',
     password: '',
-  })
+  }
 
-  const [errors, setErrors] = useState({
-    username:[], password:[]
-  })
-
-  const onSubmit = useCallback((e)=>{
-    e.preventDefault()
+  const onSubmit = (formData: typeof initFormData)=>{
     axios.post(`/api/v1/sessions`, formData)
       .then(()=>{
         alert('登录成功!')
@@ -29,15 +23,15 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
           }
         }
       })
-  },[formData]) // []不加参数参数，表示只在页面第一次创建渲染创建onSubmit函数,其它时候ui怎么变,onSubmit不变
-  // [formData] 表示formData变onSubmit也变,不加打印出来就是空，加了才有值
+  }
 
-  const onChange = useCallback((key, value)=>{
-    setFormData({
-      ...formData,
-      [key]: value // [key]如果不加[]，就是"key"
-    })
-  },[formData])
+  const {form, setErrors} = useForm({
+    initFormData,
+    onSubmit,
+    fields:[
+      {label:'用户名',type:'text', key: 'username'},
+      { label:'密码',type:'password', key: 'password'}],
+    buttons:<button type="submit">登录</button>})
 
   return (
     <>
@@ -48,16 +42,7 @@ const SignUp: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
         </div>
       }
       <h1>登录</h1>
-      <Form fields={[
-        {label:'用户名',type:'text', value: formData.username,
-          onChange: e=>onChange('username', e.target.value)
-          , errors: errors.username },
-        { label:'密码',type:'password', value: formData.password,
-          onChange: e=>onChange('password', e.target.value)
-          , errors: errors.password}]
-      } onSubmit={onSubmit} buttons={<>
-        <button type="submit">登录</button>
-      </>} />
+      {form}
     </>
   );
 }

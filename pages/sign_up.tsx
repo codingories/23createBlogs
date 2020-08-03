@@ -1,7 +1,6 @@
 import {NextPage} from 'next'
 import { useState, useCallback } from 'react';
 import axios, { AxiosResponse } from 'axios'
-import {Form} from '../components/form'
 import { useForm } from 'hooks/useForm';
 
 const SignUp: NextPage = () => { // 利用NextPage初始化注册页面

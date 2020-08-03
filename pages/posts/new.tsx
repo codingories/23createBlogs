@@ -16,7 +16,9 @@ const PostsNew: NextPage = () => {
   //   })
   // };
   // initFormData,initErrors,fields,onSubmit
-  const {form} = useForm();
+  const {form} = useForm(
+    {title: '', content: ''}
+  );
 
   return(
     <div>

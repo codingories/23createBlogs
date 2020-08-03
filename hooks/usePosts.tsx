@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import {Post} from '../src/entity/Post'
 
 export const usePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);

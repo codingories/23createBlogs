@@ -14,6 +14,7 @@ export class Post {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
+  // @ManyToOne('User', 'posts')
   @ManyToOne(type => User, user => user.posts)
   author: User;
   @Column('int')

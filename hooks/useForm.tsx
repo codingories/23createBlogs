@@ -1,4 +1,5 @@
-import {ChangeEventHandler, ReactChild, useCallback, useState} from 'react'
+import { ReactChild, useCallback, useState} from 'react'
+import {AxiosResponse} from 'axios'
 
 type Field<T> = {
   label: string,
@@ -10,11 +11,14 @@ type useFormOptions<T> = {
   initFormData: T;
   fields: Field<T>[];
   buttons: ReactChild;
-  onSubmit: (fd: T) => void
+  submit: {
+    request: (formData:T)=> Promise<AxiosResponse<T>>;
+    message: string;
+  }
 }
 
 export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,useForm里面有个T,T的类型就是initFormData的类型
-  const {initFormData, fields, buttons, onSubmit} = options
+  const {initFormData, fields, buttons, submit} = options
   // 非受控
   const [formData, setFormData] = useState(initFormData)
   const [errors, setErrors] = useState(() => {
@@ -37,8 +41,18 @@ export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,
 
   const _onSubmit = useCallback((e) => {
     e.preventDefault() // 调用外面submit
-    onSubmit(formData)
-  }, [onSubmit, formData])
+    submit.request(formData).then(()=>{
+      window.alert(submit.message)
+    },(error)=>{
+      if (error.response) {
+        const response: AxiosResponse = error.response
+        // if(response)
+        if (response.status === 422) {
+          setErrors(response.data)
+        }
+      }
+    })
+  }, [submit, formData])
 
   const form = (
     <form onSubmit={_onSubmit}>

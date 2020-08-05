@@ -60,7 +60,7 @@ export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,
           <label>
             {field.label}
             {field.type === 'textarea' ?
-              <textarea onChange={(e) => onChange(field.key, e.target.value)} value={formData[field.key].toString()}></textarea> :
+              <textarea onChange={(e) => onChange(field.key, e.target.value)} value={formData[field.key].toString()} /> :
               <input type={field.type} value={formData[field.key].toString()}
                      onChange={(e) => onChange(field.key, e.target.value)}/>
             }

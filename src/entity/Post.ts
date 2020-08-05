@@ -16,6 +16,8 @@ export class Post {
   updatedAt: Date;
   @ManyToOne(type => User, user => user.posts)
   author: User;
+  @Column('int')
+  authorId: number;
   @OneToMany(type => Comment,comment => comment.post)
   comments: Comment[];
 }

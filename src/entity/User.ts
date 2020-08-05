@@ -42,6 +42,7 @@ export class User {
     if(this.username.trim().length<=3){
       this.errors.username.push('太短')
     }
+    // 碰到bug注释连接数据库
     const found = await (await getDatabaseConnection()).manager
       .find(User, {username:this.username})
     if(found.length>0 ){

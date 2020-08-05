@@ -88,7 +88,8 @@ var User = (_dec = (0, _typeorm.Entity)('users'), _dec2 = (0, _typeorm.Unique)([
 
                 if (this.username.trim().length <= 3) {
                   this.errors.username.push('太短');
-                }
+                } // 碰到bug注释连接数据库
+
 
                 _context.next = 6;
                 return (0, _getDatabaseConnection.getDatabaseConnection)();

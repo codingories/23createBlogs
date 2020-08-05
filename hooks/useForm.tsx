@@ -46,7 +46,6 @@ export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,
     },(error)=>{
       if (error.response) {
         const response: AxiosResponse = error.response
-        // if(response)
         if (response.status === 422) {
           setErrors(response.data)
         }

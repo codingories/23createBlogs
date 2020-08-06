@@ -24,7 +24,7 @@ const SignUp: NextPage = () => { // 利用NextPage初始化注册页面
     buttons:<button type="submit">登录</button>,
     submit: {
       request: formData => axios.post(`/api/v1/users`, formData),
-      message: `注册成功`
+      success: () => window.alert('注册成功')
     }
   })
 

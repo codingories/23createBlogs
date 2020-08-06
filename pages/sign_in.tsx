@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps =
     const user = context.req.session.get('currentUser')
     return {
       props: {
-        user: JSON.parse(JSON.stringify(user))
+        user: JSON.parse(JSON.stringify(user||''))
       }
     }
   });

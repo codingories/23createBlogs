@@ -21,7 +21,7 @@ export const usePager = (options: Options)=>{
     result.concat(n): result.concat(-1,n),[]);
 
   const pager = (
-    <div>
+    <div className="wrapper">
       {page !== 1 &&  <Link href={`?page=${page-1}`}><a>上一页</a></Link> }
       {pageNumbers.map(n => n === -1 ?
         <span>...</span>:
@@ -33,6 +33,14 @@ export const usePager = (options: Options)=>{
       <span>
         第{page} / {totalPage}页
       </span>
+      <style jsx>{`
+        .wrapper {
+          margin: 0 -8px;
+        }
+        .wrapper > a, .wrapper > span {
+          margin: 0 8px;
+        }
+      `}</style>
     </div>
   )
   return {pager};

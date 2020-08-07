@@ -14,8 +14,8 @@ type Props = {
   totalPage: number;
 }
 const PostsIndex: NextPage<Props> = (props) => {
-  const {posts} = props;
-  const {pager} = usePager()
+  const {posts,count,page,totalPage} = props;
+  const {pager} = usePager({count, page, totalPage})
   return (
     <div>
       <h1>文章列表({props.count})|每页{props.perPage}</h1>
@@ -30,11 +30,6 @@ const PostsIndex: NextPage<Props> = (props) => {
       )}
       <footer>
         {pager}
-        共{props.count}篇文章,当前是第{props.page} / {props.totalPage}页
-        {props.page !== 1 &&  <Link href={`?page=${props.page-1}`}><a>上一页</a></Link> }
-
-        {props.page < props.totalPage && <Link href={`?page=${props.page+1}`}><a>下一页</a></Link>}
-
       </footer>
     </div>
   );

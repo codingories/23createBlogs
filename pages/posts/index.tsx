@@ -14,8 +14,8 @@ type Props = {
   totalPage: number;
 }
 const PostsIndex: NextPage<Props> = (props) => {
-  const {posts,count,page,totalPage} = props;
-  const {pager} = usePager({count, page, totalPage})
+  const {posts,page,totalPage} = props;
+  const {pager} = usePager({page, totalPage})
   return (
     <div>
       <h1>文章列表({props.count})|每页{props.perPage}</h1>
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = qs.parse(search);
   const page = parseInt(query.page.toString()) || 1;
   const connection = await getDatabaseConnection()
-  const perPage = 3;
+  const perPage = 1;
   const [posts, count] = await connection.manager.findAndCount(Post,
     {skip:(page-1)*perPage, take:perPage});
 

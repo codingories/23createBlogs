@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
-    "build": "next build",
+    "dev": "cross-env Node_ENV=dev next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "build": "cross-env Node_ENV=production next build",
     "start": "next start",
     "typeorm:build": "",
     "m:create": "typeorm migration:create",
@@ -17,6 +17,7 @@
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@types/lodash": "^4.14.158",
     "axios": "^0.19.2",
+    "cross-env": "^7.0.2",
     "gray-matter": "^4.0.2",
     "lodash": "^4.17.19",
     "marked": "^1.1.0",

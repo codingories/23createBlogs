@@ -6,11 +6,11 @@ import {Comment} from 'src/entity/Comment'
 import config from 'ormconfig.json'
 
 const create = async ()=>{
-  console.log('process.env.Node_ENV',process.env.Node_ENV)
+  console.log('process.env.NODE_ENV',process.env.NODE_ENV)
   // @ts-ignore
   return createConnection({
     ...config,
-    host: process.env.Node_ENV === 'production' ? 'localhost' : config.host,
+    host: process.env.NODE_ENV === 'production' ? 'localhost' : config.host,
     entities: [Post, User, Comment]
   });
 }

@@ -4,7 +4,6 @@ import {Post} from 'src/entity/Post';
 import {User} from 'src/entity/User'
 import {Comment} from 'src/entity/Comment'
 import config from 'ormconfig.json'
-import * as process from 'process'
 
 const create = async ()=>{
   console.log('process.env.Node_ENV',process.env.Node_ENV)

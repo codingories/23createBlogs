@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env Node_ENV=dev next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "dev": "next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
     "build": "cross-env Node_ENV=production next build",
     "start": "next start",
     "typeorm:build": "",

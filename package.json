@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "export NODE_ENV='development' && next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
+    "dev": "next dev & babel -w ./src --out-dir dist --extensions .ts,.tsx",
     "build": "next build",
-    "start": "export NODE_ENV='production' && next start",
+    "start": "next start",
     "typeorm:build": "",
     "m:create": "typeorm migration:create",
     "m:run": "typeorm migration:run",

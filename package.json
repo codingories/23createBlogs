@@ -17,6 +17,7 @@
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@types/lodash": "^4.14.158",
     "axios": "^0.19.2",
+    "classnames": "^2.2.6",
     "cross-env": "^7.0.2",
     "github-markdown-css": "^4.0.0",
     "gray-matter": "^4.0.2",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/classnames": "^2.2.10",
     "@types/marked": "^0.7.4",
     "@types/md5": "^2.2.0",
     "@types/node": "^14.0.23",

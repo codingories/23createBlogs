@@ -5,7 +5,7 @@ import {useForm} from '../../hooks/useForm'
 const PostsNew: NextPage = () => {
   const {form} = useForm(
     {
-      initFormData:{title: '', content: ''},
+      initFormData: {title: '', content: ''},
       fields: [
         {label: '标题', type: 'text', key: 'title'},
         {label: '内容', type: 'textarea', key: 'content'},
@@ -21,10 +21,17 @@ const PostsNew: NextPage = () => {
     }
   )
   return (
-    <div>
+    <div className="postsNew">
       {form}
+      <style jsx global>{`
+          
+            
+          .postsNew .field-content textarea{
+            height: 20em;
+          }  
+      `}</style>
     </div>
   )
 }
 
-export default PostsNew;
+export default PostsNew

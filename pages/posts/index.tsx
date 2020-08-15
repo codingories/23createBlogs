@@ -1,9 +1,10 @@
-import {GetServerSideProps, NextPage} from 'next';
+import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next'
 import {getDatabaseConnection} from 'lib/getDatabaseConnection'
 import {Post} from 'src/entity/Post'
 import Link from 'next/link'
 import qs from 'querystring'
 import {usePager} from '../../hooks/usePager'
+import {withSession} from '../../lib/withSession'
 
 
 type Props = {
@@ -12,16 +13,19 @@ type Props = {
   perPage: number;
   page: number;
   totalPage: number;
+  currentUser: User | null;
 }
 const PostsIndex: NextPage<Props> = (props) => {
-  const {posts,page,totalPage} = props;
+  const {currentUser, posts,count,page,totalPage} = props;
   const {pager} = usePager({page, totalPage})
+  console.log('currentUser')
+  console.log(currentUser);
   return (
     <>
     <div className="posts">
       <header>
         <h1>文章列表</h1>
-        <Link href="/posts/new"><a>新增文章</a></Link>
+        {currentUser && <Link href="/posts/new"><a>新增文章</a></Link>}
       </header>
       {posts.map(post =>
         <div className="onePost">
@@ -67,11 +71,12 @@ const PostsIndex: NextPage<Props> = (props) => {
 };
 export default PostsIndex;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
   const index = context.req.url.indexOf('?');
   const search = context.req.url.substr(index + 1);
   const query = qs.parse(search);
   const page = parseInt(query.page?.toString()) || 1;
+  const currentUser = (context.req as any).session.get('currentUser') || null;
   const connection = await getDatabaseConnection()
   const perPage = 10;
   const [posts, count] = await connection.manager.findAndCount(Post,
@@ -80,10 +85,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       posts : JSON.parse(JSON.stringify(posts)),
+      currentUser,
       count: count,
       perPage,
       page,
       totalPage:Math.ceil(count / perPage)
     }
   };
-};
+});

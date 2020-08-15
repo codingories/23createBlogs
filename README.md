@@ -20,7 +20,7 @@ docker container prune // 把没用的container都删掉
 ```
 docker exec -it 容器id bash
 psql -U blog
-CREATE DATABASE blog_development ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+CREATE DATABASE blog_production ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
 ```
 
 ## 开发

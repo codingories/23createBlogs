@@ -61,7 +61,7 @@ export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,
   const form = (
     <form onSubmit={_onSubmit}>
       {fields.map(field =>
-        <div key={field.key.toString()} className={cs(`field-${field.key}`, field.className)}>
+        <div key={field.key.toString()} className={cs('field',`field-${field.key}`, field.className)}>
           <label className="label">
             <span className={"label-text"}>
               {field.label}
@@ -80,13 +80,22 @@ export function useForm<T>(options: useFormOptions<T>) { // 通过参数反推T,
         {buttons}
       </div>
       <style jsx>{`
-        .label {
+       
+        .field{
+          margin: 8px 0;
+        }
+        .label{
           display:flex;
+          line-height: 32px;
+        } 
+        .label input {
+          height: 32px;
         }
         .label > .label-text{
           white-space: nowrap;
+          margin-right: 1em;
         }
-        .label > .control {
+        .label > .control{
           width: 100%;
         }
      `}

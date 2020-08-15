@@ -6,6 +6,7 @@ import marked from 'marked'
 import Link from 'next/link'
 import {withSession} from '../../lib/withSession'
 import axios from 'axios'
+import {useRouter} from 'next/router'
 type Props = {
   id: number;
   post: Post,
@@ -13,9 +14,11 @@ type Props = {
 }
 const postsShow: NextPage<Props> = (props) => {
   const {post, currentUser, id} = props
+  const router = useRouter()
   const onRemove = useCallback(()=>{
      axios.delete(`/api/v1/posts/${id}`).then(()=>{
         window.alert('删除成功')
+       router.push('/posts')
      },()=>{
        window.alert('删除失败')
      })

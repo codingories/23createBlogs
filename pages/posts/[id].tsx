@@ -19,7 +19,7 @@ const postsShow: NextPage<Props> = (props) => {
      axios.delete(`/api/v1/posts/${id}`).then(()=>{
         window.alert('删除成功')
        router.push('/posts')
-     },()=>{
+     },()=>{ 
        window.alert('删除失败')
      })
   },[id])

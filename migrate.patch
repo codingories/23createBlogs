@@ -1,0 +1,30 @@
+diff --git a/src/entity/User.ts b/src/entity/User.ts
+index 1749b6d..3ed9002 100644
+--- a/src/entity/User.ts
++++ b/src/entity/User.ts
+@@ -1,7 +1,7 @@
+ import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique, UpdateDateColumn, BeforeInsert} from 'typeorm'
+ import {Post} from './Post'
+ import {Comment} from './Comment'
+-import {getDatabaseConnection} from '../../lib/getDatabaseConnection'
++// import {getDatabaseConnection} from '../../lib/getDatabaseConnection'
+ import md5 from 'md5';
+ import _ from 'lodash'
+ 
+@@ -43,11 +43,11 @@ export class User {
+       this.errors.username.push('太短')
+     }
+     // 碰到bug注释连接数据库
+-    const found = await (await getDatabaseConnection()).manager
+-      .find(User, {username:this.username})
+-    if(found.length>0 ){
+-      this.errors.username.push('已经存在,不能重复注册')
+-    }
++    // const found = await (await getDatabaseConnection()).manager
++    //   .find(User, {username:this.username})
++    // if(found.length>0 ){
++    //   this.errors.username.push('已经存在,不能重复注册')
++    // }
+     if(this.password ===''){
+       this.errors.passwordConfirmation.push('不能为空')
+     }

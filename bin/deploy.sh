@@ -1,4 +1,4 @@
-docker start 534 &&
+docker start 173 &&
 cd /home/blog/app/ &&
 git pull &&
 yarn install --production=false

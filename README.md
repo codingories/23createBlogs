@@ -40,6 +40,9 @@ npm run dev
 ```
 
 ## 部署
+```bash
+ssh blog@dev1 'sh /home/blog/app/bin/deploy.sh'
+```
 
 ```bash 
 yarn install --production-false

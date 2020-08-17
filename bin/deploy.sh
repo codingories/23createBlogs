@@ -3,7 +3,8 @@ cd /home/blog/app/ &&
 git pull &&
 yarn install --production=false
 yarn build &&
-git apply migrate.patch &&
+git apply migrate.patch;
+yarn compile &&
 yarn m:run &&
 git reset --hard HEAD &&
 docker build -t fang/node-web-app . &&

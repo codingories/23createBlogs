@@ -54,3 +54,6 @@ docker build -t fang/node-web-app .
 docker run --network=host -p 3000:3000 -d fang/node-web-app
 ```
 
+## 备忘
+```bash
+docker run --name nginx1 --network=host -v /home/blog/nginx.conf:/etc/nginx/conf.d/default.conf -v /home/blog/app/.next/static/:/usr/share/nginx/html/_next/static -d nginx:1.19.1```

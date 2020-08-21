@@ -4,6 +4,7 @@ import {withSession} from '../lib/withSession'
 import {User} from '../src/entity/User'
 import {useForm} from '../hooks/useForm'
 import qs from 'querystring'
+import Link from 'next/link'
 
 const SignIn: NextPage<{user: User}> = (props) => { // 利用NextPage初始化登录页面
   const {form} = useForm({
@@ -34,6 +35,7 @@ const SignIn: NextPage<{user: User}> = (props) => { // 利用NextPage初始化�
       }
       <h1>登录</h1>
       {form}
+      <Link href={"/sign_up"}><a>没有账号，点我去注册</a></Link>
     </>
   );
 }

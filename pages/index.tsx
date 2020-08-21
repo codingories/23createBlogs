@@ -8,7 +8,7 @@ const Home: NextPage = ()=>{
       <img src={"/logo.png"} alt=""/>
       <h1>Ories的个人博客</h1>
       <p>好好学习，天天向上a</p>
-      <p><Link href={"/posts"}><a>文章列表</a></Link></p>
+      <p><Link href={"/posts?page=1"}><a>文章列表</a></Link></p>
     </div>
       <style jsx>
         {`

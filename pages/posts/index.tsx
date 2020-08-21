@@ -20,15 +20,19 @@ const PostsIndex: NextPage<Props> = (props) => {
   const {pager} = usePager({page, totalPage})
   console.log('currentUser')
   console.log(currentUser);
+
   return (
     <>
     <div className="posts">
       <header>
         <h1>文章列表</h1>
+
+        {!currentUser && <Link href="/sign_in"><a>登录|</a></Link>}
+        {!currentUser && <Link href="/sign_up"><a>注册</a></Link>}
         {currentUser && <Link href="/posts/new"><a>新增文章</a></Link>}
       </header>
-      {posts.map(post =>
-        <div className="onePost">
+      {posts.map((post,key) =>
+        <div className="onePost" key={key}>
           <Link key={post.id} href={`/posts/${post.id}`}>
             <a>
               {post.title}

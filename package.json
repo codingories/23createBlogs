@@ -18,7 +18,7 @@
     "@babel/cli": "^7.10.5",
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@types/lodash": "^4.14.158",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "cross-env": "^7.0.2",
     "github-markdown-css": "^4.0.0",
